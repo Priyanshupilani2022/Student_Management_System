@@ -66,6 +66,9 @@ student_management/
 
 ![image](https://github.com/user-attachments/assets/472c23fd-2f65-4e0c-9b5a-7bcbddc3f647)
 
+![image](https://github.com/user-attachments/assets/c9d3b2e2-d45b-4488-beb1-47482e99bc34)
+
+
 
 
 
