@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script>
+        function addSemester() {
+            const semesterCount = document.getElementById('semester_count');
+            const newSemester = parseInt(semesterCount.value) + 1;
+            semesterCount.value = newSemester;
+
+            const semesterDiv = document.createElement('div');
+            semesterDiv.className = 'mb-3';
+            semesterDiv.id = `semester_${newSemester}`;
+
+            semesterDiv.innerHTML = `
+                <h4>Semester ${newSemester}</h4>
+                <div id="subjects_${newSemester}">
+                    <div class="mb-3">
+                        <label for="subject_name_${newSemester}_1" class="form-label">Subject Name</label>
+                        <input type="text" class="form-control" name="subject_name_${newSemester}_1" placeholder="Enter subject name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="marks_obtained_${newSemester}_1" class="form-label">Marks Obtained</label>
+                        <input type="number" class="form-control" name="marks_obtained_${newSemester}_1" placeholder="Enter marks obtained">
+                    </div>
+                    <div class="mb-3">
+                        <label for="max_marks_${newSemester}_1" class="form-label">Max Marks</label>
+                        <input type="number" class="form-control" name="max_marks_${newSemester}_1" placeholder="Enter max marks">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="addSubject(${newSemester})">Add Subject</button>
+                <input type="hidden" name="subject_count_${newSemester}" id="subject_count_${newSemester}" value="1">
+            `;
+
+            document.getElementById('semesters').appendChild(semesterDiv);
+        }
+
+        function addSubject(semester) {
+            const subjectCount = document.getElementById(`subject_count_${semester}`);
+            const newSubject = parseInt(subjectCount.value) + 1;
+            subjectCount.value = newSubject;
+
+            const subjectDiv = document.createElement('div');
+            subjectDiv.className = 'mb-3';
+
+            subjectDiv.innerHTML = `
+                <div class="mb-3">
+                    <label for="subject_name_${semester}_${newSubject}" class="form-label">Subject Name</label>
+                    <input type="text" class="form-control" name="subject_name_${semester}_${newSubject}" placeholder="Enter subject name">
+                </div>
+                <div class="mb-3">
+                    <label for="marks_obtained_${semester}_${newSubject}" class="form-label">Marks Obtained</label>
+                    <input type="number" class="form-control" name="marks_obtained_${semester}_${newSubject}" placeholder="Enter marks obtained">
+                </div>
+                <div class="mb-3">
+                    <label for="max_marks_${semester}_${newSubject}" class="form-label">Max Marks</label>
+                    <input type="number" class="form-control" name="max_marks_${semester}_${newSubject}" placeholder="Enter max marks">
+                </div>
+            `;
+
+            document.getElementById(`subjects_${semester}`).appendChild(subjectDiv);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Student</h1>
+        <form method="post">
+            <div class="mb-3">
+                <label for="student_no" class="form-label">Student Number</label>
+                <input type="text" class="form-control" name="student_no" placeholder="Enter student number" required>
+            </div>
+            <div class="mb-3">
+                <label for="student_name" class="form-label">Student Name</label>
+                <input type="text" class="form-control" name="student_name" placeholder="Enter student name" required>
+            </div>
+            <div class="mb-3">
+                <label for="class" class="form-label">Class</label>
+                <input type="text" class="form-control" name="class" placeholder="Enter class" required>
+            </div>
+            <div id="semesters">
+                <div class="mb-3" id="semester_1">
+                    <h4>Semester 1</h4>
+                    <div id="subjects_1">
+                        <div class="mb-3">
+                            <label for="subject_name_1_1" class="form-label">Subject Name</label>
+                            <input type="text" class="form-control" name="subject_name_1_1" placeholder="Enter subject name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="marks_obtained_1_1" class="form-label">Marks Obtained</label>
+                            <input type="number" class="form-control" name="marks_obtained_1_1" placeholder="Enter marks obtained">
+                        </div>
+                        <div class="mb-3">
+                            <label for="max_marks_1_1" class="form-label">Max Marks</label>
+                            <input type="number" class="form-control" name="max_marks_1_1" placeholder="Enter max marks">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addSubject(1)">Add Subject</button>
+                    <input type="hidden" name="subject_count_1" id="subject_count_1" value="1">
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addSemester()">Add Semester</button>
+            <input type="hidden" name="semester_count" id="semester_count" value="1">
+            <div class="mb-3 mt-3">
+                <button type="submit" class="btn btn-primary">Add Student</button>
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

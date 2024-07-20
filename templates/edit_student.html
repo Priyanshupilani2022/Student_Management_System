@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <title>Edit Student</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Student Details</h2>
+        <form action="{{ url_for('edit_student', student_no=student.student_no) }}" method="POST">
+            <div class="mb-3">
+                <label for="student_no" class="form-label">Student Number</label>
+                <input type="text" class="form-control" id="student_no" name="student_no" value="{{ student.student_no }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="student_name" class="form-label">Student Name</label>
+                <input type="text" class="form-control" id="student_name" name="student_name" value="{{ student.student_name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="class" class="form-label">Class</label>
+                <input type="text" class="form-control" id="class" name="class" value="{{ student.class }}" required>
+            </div>
+            <div id="semesters">
+                {% for semester in student.semesters %}
+                <div class="semester">
+                    <h2>Semester {{ semester.semester }}</h2>
+                    {% for subject in semester.subjects %}
+                    <div class="mb-3">
+                        <label for="subject_name_{{ loop.index }}" class="form-label">Subject Name</label>
+                        <input type="text" class="form-control" id="subject_name_{{ loop.index }}" name="subject_name_{{ loop.index }}" value="{{ subject.subject_name }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="marks_obtained_{{ loop.index }}" class="form-label">Marks Obtained</label>
+                        <input type="number" class="form-control" id="marks_obtained_{{ loop.index }}" name="marks_obtained_{{ loop.index }}" value="{{ subject.marks_obtained }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="max_marks_{{ loop.index }}" class="form-label">Maximum Marks</label>
+                        <input type="number" class="form-control" id="max_marks_{{ loop.index }}" name="max_marks_{{ loop.index }}" value="{{ subject.max_marks }}" required>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Update Student</button>
+        </form>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

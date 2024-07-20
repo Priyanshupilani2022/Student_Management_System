@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <title>Upload Student Data</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Student Data</h2>
+        <form action="{{ url_for('upload') }}" method="POST">
+            <div class="mb-3">
+                <label for="student_no" class="form-label">Student Number</label>
+                <input type="text" class="form-control" id="student_no" name="student_no" required>
+            </div>
+            <div class="mb-3">
+                <label for="student_name" class="form-label">Student Name</label>
+                <input type="text" class="form-control" id="student_name" name="student_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="class" class="form-label">Class</label>
+                <input type="text" class="form-control" id="class" name="class" required>
+            </div>
+            <div id="semesters">
+                <div class="semester">
+                    <h2>Semester 1</h2>
+                    <div class="mb-3">
+                        <label for="subject_name_1" class="form-label">Subject Name</label>
+                        <input type="text" class="form-control" id="subject_name_1" name="subject_name_1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="marks_obtained_1" class="form-label">Marks Obtained</label>
+                        <input type="number" class="form-control" id="marks_obtained_1" name="marks_obtained_1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="max_marks_1" class="form-label">Maximum Marks</label>
+                        <input type="number" class="form-control" id="max_marks_1" name="max_marks_1" required>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" id="add-semester">Add Semester</button>
+            <button type="submit" class="btn btn-primary">Upload Student</button>
+        </form>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('add-semester').addEventListener('click', function() {
+            const semestersDiv = document.getElementById('semesters');
+            const semesterCount = semestersDiv.querySelectorAll('.semester').length;
+            const newSemester = semesterCount + 1;
+            const newSemesterDiv = document.createElement('div');
+            newSemesterDiv.classList.add('semester');
+            newSemesterDiv.innerHTML = `
+                <h2>Semester ${newSemester}</h2>
+                <div class="mb-3">
+                    <label for="subject_name_${newSemester}" class="form-label">Subject Name</label>
+                    <input type="text" class="form-control" id="subject_name_${newSemester}" name="subject_name_${newSemester}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="marks_obtained_${newSemester}" class="form-label">Marks Obtained</label>
+                    <input type="number" class="form-control" id="marks_obtained_${newSemester}" name="marks_obtained_${newSemester}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="max_marks_${newSemester}" class="form-label">Maximum Marks</label>
+                    <input type="number" class="form-control" id="max_marks_${newSemester}" name="max_marks_${newSemester}" required>
+                </div>
+            `;
+            semestersDiv.appendChild(newSemesterDiv);
+        });
+    </script>
+</body>
+</html>
