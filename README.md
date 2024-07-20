@@ -17,7 +17,7 @@ A comprehensive web application to manage student information, built with Flask 
 
 #  Setup Instructions
 Clone the Repository:
-  git clone https://github.com/yourusername/student_management.git
+  git clone https://github.com/Priyanshupilani2022/Student_Management_System
   cd student_management
 
 # Set Up Virtual Environment:
